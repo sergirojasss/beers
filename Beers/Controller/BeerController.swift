@@ -7,6 +7,11 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 
 // Relation between Entity Beer & DB
+class BeerController {
+    
+    
+}
