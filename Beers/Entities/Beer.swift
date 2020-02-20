@@ -10,7 +10,7 @@ import Foundation
 
 public class Beer {
     // Only using the attributes the app really needs. We could save as well all the other info of the API but it's useless right now.
-    public let id: String
+    public let id: Int
     public let name: String
     public let tagline: String
     public let imageURL: String
@@ -19,7 +19,7 @@ public class Beer {
     public let foodPairing: String //would be more clean if it's [String] but for what we want this field (compairing) it's works and it makes easier to code
     
     
-    public init(id: String, name: String, tagline: String, imageURL: String, description: String, abv: Double, foodPairing: String) {
+    public init(id: Int, name: String, tagline: String, imageURL: String, description: String, abv: Double, foodPairing: String) {
         self.id = id
         self.name = name
         self.tagline = tagline

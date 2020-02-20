@@ -8,12 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, BeerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        NetworkController.getBeersRequest(foodPairing: "chicken")
+        BeerController.deleteAllBeers()
+        BeerController.getBeers(vc: self, foodPairing: "Grilled_chicken_quesadilla") //I really think it's not the correct way to do it, but I don't really remember how I was doing it
+    }
+
+    func gotBeers(beers: [Beer]) {
+        print(beers.count)
     }
 
 

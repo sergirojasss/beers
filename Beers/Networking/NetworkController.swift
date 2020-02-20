@@ -22,12 +22,13 @@ class NetworkController {
     static public let foodPairing: String = "food_pairing"
 
     
-    static func getBeersRequest(foodPairing: String?) {
+    static func getBeersRequest(foodPairing: String? = nil, onCompletion: @escaping(([Beer]) -> ())) {
         var beers: [Beer] = []
         var url = allBeersUrl
+        let db = AppDelegate.db
         
         if foodPairing != nil {
-            url.append(contentsOf: "?&food=_\(foodPairing!)_")
+            url.append(contentsOf: "?&food=\(foodPairing!)")
         }
         
         AF.request(url, method: .get, parameters: nil)
@@ -35,14 +36,17 @@ class NetworkController {
                 switch response.result {
                 case .success(let value):
                     let json: JSON = JSON(value)
-                    for (_, _) in json {
-                        beers.append(jsonToBeerEntity(json: json))
+                    for (_, value) in json {
+                        beers.append(jsonToBeerEntity(json: value))
                     }
                     if beers.count == 25 {
                         // must do something, we're not offering all the possible beers to customer
                         print("must do something, we're not offering all the possible beers to customer")
                     }
-                    print(beers.count)
+                    for beer in beers {
+                        db.insert(beer: beer)
+                    }
+                    onCompletion(db.read())
                 case .failure(let error):
                     // error handling
                     print(error.errorDescription)
@@ -53,6 +57,7 @@ class NetworkController {
     }
     
     static func jsonToBeerEntity(json: JSON) -> Beer {
-        return Beer(id: json[NetworkController.id].stringValue, name: json[NetworkController.name].stringValue, tagline: json[NetworkController.tagline].stringValue, imageURL: json[NetworkController.imageUrl].stringValue, description: json[NetworkController.description].stringValue, abv: json[NetworkController.abv].doubleValue, foodPairing: json[NetworkController.foodPairing].arrayValue.description)
+        return Beer(id: json[NetworkController.id].intValue, name: json[NetworkController.name].stringValue, tagline: json[NetworkController.tagline].stringValue, imageURL: json[NetworkController.imageUrl].stringValue, description: json[NetworkController.description].stringValue, abv: json[NetworkController.abv].doubleValue, foodPairing: json[NetworkController.foodPairing].arrayValue.description)
     }
+    
 }
