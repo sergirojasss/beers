@@ -17,6 +17,7 @@ public class Beer {
     public let description: String
     public let abv: Double
     
+    
     public init(id: String, name: String, tagline: String, imageURL: String, description: String, abv: Double) {
         self.id = id
         self.name = name
