@@ -8,6 +8,26 @@
 
 import Foundation
 
+public class Beer {
+    // Only using the attributes the app really needs. We could save as well all the other info of the API but it's useless right now.
+    public let id: String
+    public let name: String
+    public let tagline: String
+    public let imageURL: String
+    public let description: String
+    public let abv: Double
+    
+    public init(id: String, name: String, tagline: String, imageURL: String, description: String, abv: Double) {
+        self.id = id
+        self.name = name
+        self.tagline = tagline
+        self.imageURL = imageURL
+        self.description = description
+        self.abv = abv
+    }
+}
+
+// beer name, tagline, description, image, and ABV
 // - Mark: JSON beer example
 //{
 //  "id": 1,
