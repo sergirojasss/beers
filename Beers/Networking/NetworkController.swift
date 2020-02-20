@@ -27,8 +27,8 @@ class NetworkController {
         var url = allBeersUrl
         let db = AppDelegate.db
         
-        if foodPairing != nil {
-            url.append(contentsOf: "?&food=\(foodPairing!)")
+        if foodPairing != nil && !foodPairing!.isEmpty {
+            url.append(contentsOf: "?&food=\(foodPairing!.replacingOccurrences(of: " ", with: "_"))")
         }
         
         AF.request(url, method: .get, parameters: nil)

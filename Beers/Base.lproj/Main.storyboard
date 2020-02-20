@@ -16,26 +16,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SBf-BY-lBS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jx0-F9-pYK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="SBf-BY-lBS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5Kw-f3-p51"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jx0-F9-pYK" secondAttribute="trailing" id="5hx-7j-B8Q"/>
+                            <constraint firstItem="jx0-F9-pYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FbU-aG-tMR"/>
                             <constraint firstAttribute="bottom" secondItem="SBf-BY-lBS" secondAttribute="bottom" id="NHB-YN-J2j"/>
                             <constraint firstItem="SBf-BY-lBS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QEp-Sf-llP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SBf-BY-lBS" secondAttribute="trailing" id="Sgf-cG-Rwn"/>
+                            <constraint firstItem="SBf-BY-lBS" firstAttribute="top" secondItem="jx0-F9-pYK" secondAttribute="bottom" symbolic="YES" id="XdR-pe-lRJ"/>
+                            <constraint firstItem="jx0-F9-pYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aaf-M3-vP2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="beerList" destination="SBf-BY-lBS" id="h2q-g9-WBA"/>
+                        <outlet property="searchBar" destination="jx0-F9-pYK" id="hzl-9V-EP1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="113" y="91"/>
+            <point key="canvasLocation" x="111.59420289855073" y="90.401785714285708"/>
         </scene>
     </scenes>
 </document>

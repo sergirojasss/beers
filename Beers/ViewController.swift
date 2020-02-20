@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var beers: [Beer] = []
     
     @IBOutlet var beerList: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         
@@ -20,13 +21,20 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         // Do any additional setup after loading the view.
         self.beerList.dataSource = self
         self.beerList.delegate = self
+        self.searchBar.delegate = self
         
-//        BeerController.deleteAllBeers()
-        BeerController.getBeers(vc: self) //I really think it's not the correct way to do it, but I don't really remember how I was doing it
+        BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
     }
 
-    func gotBeers(beers: [Beer]) {
+    func gotBeers(beers: [Beer], condition: String) {
         self.beers = beers
+        
+        if !condition.isEmpty {        
+            self.beers = beers.filter { (beer) -> Bool in
+                return beer.foodPairing.contains(condition)
+            }
+        }
+
         self.beerList.reloadData()
     }
 
@@ -41,7 +49,11 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         return cell
     }
     
-
+    //    - MARK: SearchBar functions
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        BeerController.getBeers(vc: self, foodPairing: searchText)
+    }
+    
 
 }
 
