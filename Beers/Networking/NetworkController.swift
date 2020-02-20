@@ -46,7 +46,7 @@ class NetworkController {
                     for beer in beers {
                         db.insert(beer: beer)
                     }
-                    onCompletion(db.read())
+                    onCompletion(db.read(foodPairing: foodPairing))
                 case .failure(let error):
                     // error handling
                     print(error.errorDescription)

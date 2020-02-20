@@ -26,14 +26,8 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
     }
 
-    func gotBeers(beers: [Beer], condition: String) {
+    func gotBeers(beers: [Beer]) {
         self.beers = beers
-        
-        if !condition.isEmpty {        
-            self.beers = beers.filter { (beer) -> Bool in
-                return beer.foodPairing.contains(condition)
-            }
-        }
 
         self.beerList.reloadData()
     }

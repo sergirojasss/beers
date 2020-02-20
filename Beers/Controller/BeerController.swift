@@ -11,7 +11,7 @@ import SwiftyJSON
 
 
 protocol BeerDelegate {
-    func gotBeers(beers: [Beer], condition: String)
+    func gotBeers(beers: [Beer])
 }
 
 // Relation between Entity Beer & DB
@@ -21,18 +21,14 @@ class BeerController {
         let delegate: BeerDelegate?
         let db = AppDelegate.db
         delegate = vc
-        var condition = ""
-        let beers = db.read(condition: condition)
-        
-        if foodPairing != nil && !foodPairing!.isEmpty{
-            condition = "WHERE food_pairing LIKE '%\(foodPairing!)%'"
-        }
-//        checking if we already have asked for beers, if not, we're calling the API with the method "getBeersRequest"
-        if beers.count == 0 { // we're assuming that Data from API never gets updated.
+                
+        let beers = db.read(foodPairing: foodPairing)
+        //checking if we already have asked for beers, if not, we're calling the API with the method "getBeersRequest" also if we checked DB and there's no match, we're trying to find some result on the API
+        if beers.count == 0 {
             self.getBeersRequest(vc: vc, foodPairing: foodPairing)
             print("Looking for results on Internet")
         } else {
-            delegate?.gotBeers(beers: beers, condition: foodPairing ?? "")
+            delegate?.gotBeers(beers: beers)
             print("Looking for results on DB")
         }
     }
@@ -47,7 +43,7 @@ class BeerController {
         NetworkController.getBeersRequest(foodPairing: foodPairing) {beers in
             let delegate: BeerDelegate?
             delegate = vc
-            delegate?.gotBeers(beers: beers, condition: foodPairing ?? "")
+            delegate?.gotBeers(beers: beers)
         }
     }
 }
