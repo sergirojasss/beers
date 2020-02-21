@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var beers: [Beer] = []
+    var searchText: String = ""
     
     @IBOutlet var beerList: UITableView!
     @IBOutlet var searchBar: UISearchBar!
@@ -45,9 +46,14 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
     
     //    - MARK: SearchBar functions
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
         BeerController.getBeers(vc: self, foodPairing: searchText)
     }
     
-
+    @IBAction func changeOrder(_ sender: Any) {
+        UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.orderBeersBy), forKey: Constants.orderBeersBy)
+        BeerController.getBeers(vc: self, foodPairing: self.searchText)
+    }
+    
 }
 

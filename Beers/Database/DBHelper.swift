@@ -81,14 +81,14 @@ class DBHelper
         sqlite3_finalize(insertStatement)
     }
     
-    func read(foodPairing: String? = nil, orderByAbvAsc: Bool = true) -> [Beer] {
+    func read(foodPairing: String? = nil) -> [Beer] {
 
         var condition: String = ""
 
         if foodPairing != nil && !foodPairing!.isEmpty{
             condition = "WHERE food_pairing LIKE '%\(foodPairing!)%'"
         }
-        orderByAbvAsc ? condition.append(" ORDER BY abv ASC ") : condition.append(" ORDER BY abv DESC ")
+        UserDefaults.standard.bool(forKey: Constants.orderBeersBy) ? condition.append(" ORDER BY abv ASC ") : condition.append(" ORDER BY abv DESC ")
 
             let queryStatementString = "SELECT * FROM beer \(condition);" //not best way to do it, I could implement a method which puts the "WHERE" clause in front and then keep formatting the query
             var queryStatement: OpaquePointer? = nil

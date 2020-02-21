@@ -10,6 +10,7 @@
 		1C4ABEA759E82A1BAB38E2F0 /* Pods_Beers_BeersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0C844B11A1A0E9D5DBE7D20 /* Pods_Beers_BeersUITests.framework */; };
 		945DDDD19617B8435DF02241 /* Pods_BeersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DF552BCC29751EC50035AA /* Pods_BeersTests.framework */; };
 		A32FDF502829F1D3D387485E /* Pods_Beers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D21E5EE0606B9F6BC32173B /* Pods_Beers.framework */; };
+		FE7F305723FFD2E7006FCAB3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7F305623FFD2E7006FCAB3 /* Constants.swift */; };
 		FEF0FE3223FD937C00854141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF0FE3123FD937C00854141 /* AppDelegate.swift */; };
 		FEF0FE3423FD937C00854141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF0FE3323FD937C00854141 /* SceneDelegate.swift */; };
 		FEF0FE3623FD937C00854141 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF0FE3523FD937C00854141 /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 		A0C844B11A1A0E9D5DBE7D20 /* Pods_Beers_BeersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beers_BeersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E3645FC4C526A2FF31DB /* Pods-Beers-BeersUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beers-BeersUITests.release.xcconfig"; path = "Target Support Files/Pods-Beers-BeersUITests/Pods-Beers-BeersUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DCCDB944F8F44627FAFA8441 /* Pods-Beers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beers.debug.xcconfig"; path = "Target Support Files/Pods-Beers/Pods-Beers.debug.xcconfig"; sourceTree = "<group>"; };
+		FE7F305623FFD2E7006FCAB3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FEF0FE2E23FD937C00854141 /* Beers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF0FE3123FD937C00854141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEF0FE3323FD937C00854141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				FEF0FE3123FD937C00854141 /* AppDelegate.swift */,
 				FEF0FE3323FD937C00854141 /* SceneDelegate.swift */,
 				FEF0FE3523FD937C00854141 /* ViewController.swift */,
+				FE7F305623FFD2E7006FCAB3 /* Constants.swift */,
 				FEF0FE6723FD986C00854141 /* Entities */,
 				FEF0FE6A23FD991100854141 /* Controller */,
 				FEF0FE6123FD979B00854141 /* Networking */,
@@ -458,6 +461,7 @@
 				FEF0FE3423FD937C00854141 /* SceneDelegate.swift in Sources */,
 				FEF0FE6C23FD992500854141 /* BeerController.swift in Sources */,
 				FEF0FE6423FD983100854141 /* DBHelper.swift in Sources */,
+				FE7F305723FFD2E7006FCAB3 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
