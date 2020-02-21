@@ -24,6 +24,7 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         self.beerList.delegate = self
         self.beerList.estimatedRowHeight = 70.0
         self.beerList.rowHeight = UITableView.automaticDimension
+        self.beerList.keyboardDismissMode = .onDrag
         
         self.searchBar.delegate = self
         
@@ -53,6 +54,7 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         (tableView.cellForRow(at: indexPath) as! BeerListTableViewCell).setSelectedCustom()
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        // losing the selection on when interacting with the searchBar because it reloads the hole tableview from database, the way to solve it it's adding a bool field on database keeping the state
     }
     
     //    - MARK: SearchBar functions
