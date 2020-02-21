@@ -11,6 +11,7 @@
 		945DDDD19617B8435DF02241 /* Pods_BeersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DF552BCC29751EC50035AA /* Pods_BeersTests.framework */; };
 		A32FDF502829F1D3D387485E /* Pods_Beers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D21E5EE0606B9F6BC32173B /* Pods_Beers.framework */; };
 		FE7F305723FFD2E7006FCAB3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7F305623FFD2E7006FCAB3 /* Constants.swift */; };
+		FE7F306323FFD5F6006FCAB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE7F306523FFD5F6006FCAB3 /* Localizable.strings */; };
 		FEF0FE3223FD937C00854141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF0FE3123FD937C00854141 /* AppDelegate.swift */; };
 		FEF0FE3423FD937C00854141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF0FE3323FD937C00854141 /* SceneDelegate.swift */; };
 		FEF0FE3623FD937C00854141 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF0FE3523FD937C00854141 /* ViewController.swift */; };
@@ -53,6 +54,9 @@
 		A496E3645FC4C526A2FF31DB /* Pods-Beers-BeersUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beers-BeersUITests.release.xcconfig"; path = "Target Support Files/Pods-Beers-BeersUITests/Pods-Beers-BeersUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DCCDB944F8F44627FAFA8441 /* Pods-Beers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beers.debug.xcconfig"; path = "Target Support Files/Pods-Beers/Pods-Beers.debug.xcconfig"; sourceTree = "<group>"; };
 		FE7F305623FFD2E7006FCAB3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FE7F306423FFD5F6006FCAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FE7F306623FFD604006FCAB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FE7F306723FFD60D006FCAB3 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FEF0FE2E23FD937C00854141 /* Beers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF0FE3123FD937C00854141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEF0FE3323FD937C00854141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				FEF0FE3A23FD937F00854141 /* Assets.xcassets */,
 				FEF0FE3C23FD937F00854141 /* LaunchScreen.storyboard */,
 				FEF0FE3F23FD937F00854141 /* Info.plist */,
+				FE7F306523FFD5F6006FCAB3 /* Localizable.strings */,
 			);
 			path = Beers;
 			sourceTree = "<group>";
@@ -306,6 +311,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				ca,
 			);
 			mainGroup = FEF0FE2523FD937C00854141;
 			productRefGroup = FEF0FE2F23FD937C00854141 /* Products */;
@@ -325,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEF0FE3E23FD937F00854141 /* LaunchScreen.storyboard in Resources */,
+				FE7F306323FFD5F6006FCAB3 /* Localizable.strings in Resources */,
 				FEF0FE3B23FD937F00854141 /* Assets.xcassets in Resources */,
 				FEF0FE3923FD937C00854141 /* Main.storyboard in Resources */,
 			);
@@ -497,6 +505,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FE7F306523FFD5F6006FCAB3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE7F306423FFD5F6006FCAB3 /* en */,
+				FE7F306623FFD604006FCAB3 /* es */,
+				FE7F306723FFD60D006FCAB3 /* ca */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		FEF0FE3723FD937C00854141 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -520,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -580,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
