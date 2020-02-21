@@ -20,6 +20,9 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.title = NSLocalizedString(ConstantsLocalizedStrings.navigationBarMainTitle, comment: "")
+        
         self.beerList.dataSource = self
         self.beerList.delegate = self
         self.beerList.estimatedRowHeight = 70.0
@@ -28,7 +31,7 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         
         self.searchBar.delegate = self
         
-        self.searchBar.placeholder = NSLocalizedString(LocalizedStringsConstants.foodPairingSearchbarPlaceholder, comment: "")
+        self.searchBar.placeholder = NSLocalizedString(ConstantsLocalizedStrings.foodPairingSearchbarPlaceholder, comment: "")
         
         BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
     }
