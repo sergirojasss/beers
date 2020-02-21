@@ -9,7 +9,11 @@
 import Foundation
 
 struct Constants {
+    //localized Strings
     static let orderBeersBy = "order_beers_by"
+    
+    //image stuff
+    static let imagePlaceholder = "iv_placeholder"
 }
 
 struct LocalizedStringsConstants {
