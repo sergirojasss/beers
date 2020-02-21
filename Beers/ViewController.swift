@@ -22,6 +22,9 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         // Do any additional setup after loading the view.
         self.beerList.dataSource = self
         self.beerList.delegate = self
+        self.beerList.estimatedRowHeight = 70.0
+        self.beerList.rowHeight = UITableView.automaticDimension
+        
         self.searchBar.delegate = self
         
         self.searchBar.placeholder = NSLocalizedString(LocalizedStringsConstants.foodPairingSearchbarPlaceholder, comment: "")
@@ -41,9 +44,15 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.textLabel?.text = beers[indexPath.row].name
-        return cell
+        if let cell: BeerListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "beer_list_cell") as? BeerListTableViewCell {
+            cell.configCell(beer: beers[indexPath.row])
+            return cell
+        }
+        return UITableViewCell() //never should happen, but just in case, the app doesn't crash
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        (tableView.cellForRow(at: indexPath) as! BeerListTableViewCell).setSelectedCustom()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     //    - MARK: SearchBar functions

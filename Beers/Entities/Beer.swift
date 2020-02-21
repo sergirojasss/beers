@@ -18,6 +18,8 @@ public class Beer {
     public let abv: Double
     public let foodPairing: String //would be more clean if it's [String] but for what we want this field (compairing) it's works and it makes easier to code
     
+    public var isSelected: Bool = false //hack for keeping selected the cell on the tableView
+    
     
     public init(id: Int, name: String, tagline: String, imageURL: String, description: String, abv: Double, foodPairing: String) {
         self.id = id
