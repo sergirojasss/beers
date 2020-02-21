@@ -11,3 +11,7 @@ import Foundation
 struct Constants {
     static let orderBeersBy = "order_beers_by"
 }
+
+struct LocalizedStringsConstants {
+    static let foodPairingSearchbarPlaceholder = "food_pairing_sb_ph"
+}

@@ -24,7 +24,7 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         self.beerList.delegate = self
         self.searchBar.delegate = self
         
-        self.searchBar.placeholder = NSLocalizedString("Type_here_your_food", comment: "")
+        self.searchBar.placeholder = NSLocalizedString(LocalizedStringsConstants.foodPairingSearchbarPlaceholder, comment: "")
         
         BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
     }
