@@ -15,6 +15,9 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
     
     @IBOutlet var beerList: UITableView!
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var orderByLabel: UILabel!
+    @IBOutlet var orderByBtn: UIButton!
+    @IBOutlet var orderByView: UIView!
     
     override func viewDidLoad() {
         
@@ -30,8 +33,11 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         self.beerList.keyboardDismissMode = .onDrag
         
         self.searchBar.delegate = self
-        
         self.searchBar.placeholder = NSLocalizedString(ConstantsLocalizedStrings.foodPairingSearchbarPlaceholder, comment: "")
+        
+        self.orderByView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
+        self.orderByLabel.text = NSLocalizedString(ConstantsLocalizedStrings.orderByABV, comment: "")
         
         BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
     }
@@ -40,6 +46,10 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         self.beers = beers
 
         self.beerList.reloadData()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        // should implement something to take care of the images memory
     }
 
 //    - MARK: TableView functions
@@ -68,6 +78,11 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
     
     @IBAction func changeOrder(_ sender: Any) {
         UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.orderBeersBy), forKey: Constants.orderBeersBy)
+        if UserDefaults.standard.bool(forKey: Constants.orderBeersBy) {
+            self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
+        } else {
+            self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
+        }
         BeerController.getBeers(vc: self, foodPairing: self.searchText)
     }
     

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SBf-BY-lBS">
-                                <rect key="frame" x="0.0" y="144" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="196" width="414" height="700"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="beer_list_cell" rowHeight="140" id="Idp-JP-GHM" customClass="BeerListTableViewCell" customModule="Beers" customModuleProvider="target">
@@ -32,7 +32,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FO-kd-l3G">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FO-kd-l3G">
                                                     <rect key="frame" x="352" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -82,6 +82,32 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAJ-WB-DXy">
+                                <rect key="frame" x="0.0" y="144" width="414" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvF-kB-FVr">
+                                        <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb7-N9-3UB">
+                                        <rect key="frame" x="370" y="10" width="24" height="24"/>
+                                        <state key="normal" image="up"/>
+                                        <connections>
+                                            <action selector="changeOrder:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XSz-lU-Nlb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="LvF-kB-FVr" firstAttribute="leading" secondItem="IAJ-WB-DXy" secondAttribute="leading" constant="20" symbolic="YES" id="AnW-fi-Q84"/>
+                                    <constraint firstItem="LvF-kB-FVr" firstAttribute="centerY" secondItem="IAJ-WB-DXy" secondAttribute="centerY" id="LsZ-6g-D5W"/>
+                                    <constraint firstItem="Cb7-N9-3UB" firstAttribute="centerY" secondItem="LvF-kB-FVr" secondAttribute="centerY" id="P8d-dS-473"/>
+                                    <constraint firstAttribute="height" constant="44" id="Tbp-pk-S5x"/>
+                                    <constraint firstAttribute="trailing" secondItem="Cb7-N9-3UB" secondAttribute="trailing" constant="20" symbolic="YES" id="kcF-rA-cn5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -90,20 +116,20 @@
                             <constraint firstAttribute="bottom" secondItem="SBf-BY-lBS" secondAttribute="bottom" id="NHB-YN-J2j"/>
                             <constraint firstItem="SBf-BY-lBS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QEp-Sf-llP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SBf-BY-lBS" secondAttribute="trailing" id="Sgf-cG-Rwn"/>
-                            <constraint firstItem="SBf-BY-lBS" firstAttribute="top" secondItem="jx0-F9-pYK" secondAttribute="bottom" symbolic="YES" id="XdR-pe-lRJ"/>
                             <constraint firstItem="jx0-F9-pYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aaf-M3-vP2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IAJ-WB-DXy" secondAttribute="trailing" id="ic5-gy-61X"/>
+                            <constraint firstItem="IAJ-WB-DXy" firstAttribute="top" secondItem="jx0-F9-pYK" secondAttribute="bottom" symbolic="YES" id="sC1-gU-C22"/>
+                            <constraint firstItem="IAJ-WB-DXy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="w0s-3p-UAf"/>
+                            <constraint firstItem="SBf-BY-lBS" firstAttribute="top" secondItem="IAJ-WB-DXy" secondAttribute="bottom" constant="8" symbolic="YES" id="w29-iC-na5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="sTt-UL-rME">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="Yex-bu-Dli">
-                            <connections>
-                                <action selector="changeOrder:" destination="BYZ-38-t0r" id="iRy-ai-3ow"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="sTt-UL-rME"/>
                     <connections>
                         <outlet property="beerList" destination="SBf-BY-lBS" id="h2q-g9-WBA"/>
+                        <outlet property="orderByBtn" destination="Cb7-N9-3UB" id="dGG-OG-g29"/>
+                        <outlet property="orderByLabel" destination="LvF-kB-FVr" id="mTr-OU-sC5"/>
+                        <outlet property="orderByView" destination="IAJ-WB-DXy" id="MVP-8B-EPo"/>
                         <outlet property="searchBar" destination="jx0-F9-pYK" id="hzl-9V-EP1"/>
                     </connections>
                 </viewController>
@@ -130,4 +156,7 @@
             <point key="canvasLocation" x="111.59420289855073" y="90.401785714285708"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="up" width="24" height="24"/>
+    </resources>
 </document>
