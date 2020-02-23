@@ -35,7 +35,7 @@ class BeerListTableViewCell: UITableViewCell {
         self.beer = beer
         
         name.text = beer.name
-        abv.text = "\(beer.abv)"
+        abv.text = "\(NSLocalizedString(ConstantsLocalizedStrings.abv, comment: "")): \(beer.abv)%"
         tagline.text = beer.isSelected ? beer.description : beer.tagline
         
         imageViewHeightConstraint.constant = beer.isSelected ? 80 : 0

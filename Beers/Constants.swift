@@ -21,4 +21,5 @@ struct Constants {
 struct ConstantsLocalizedStrings {
     static let foodPairingSearchbarPlaceholder = "food_pairing_sb_ph"
     static let navigationBarMainTitle = "navbar_main_title"
+    static let abv = "abv"
 }
