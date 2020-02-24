@@ -12,10 +12,11 @@ struct Constants {
     //localized Strings
     static let orderBeersBy = "order_beers_by"
     
-    //app stuff navigationBarMainTitle
-    
     //image stuff
     static let imagePlaceholder = "iv_placeholder"
+    
+    static let APIpagination: Int = 25
+    
 }
 
 struct ConstantsLocalizedStrings {

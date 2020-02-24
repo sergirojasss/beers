@@ -71,7 +71,7 @@ class DBHelper
             sqlite3_bind_text(insertStatement, 7, (beer.foodPairing as NSString).utf8String, -1, nil)
             
             if sqlite3_step(insertStatement) == SQLITE_DONE {
-                print("Successfully inserted row.")
+//                print("Successfully inserted row.")
             } else {
                 print("Could not insert row.")
             }
