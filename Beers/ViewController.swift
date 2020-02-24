@@ -39,7 +39,7 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
         self.orderByLabel.text = NSLocalizedString(ConstantsLocalizedStrings.orderByABV, comment: "")
         
-        BeerController.deleteAllBeers()
+//        BeerController.deleteAllBeers()
         BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
     }
 
