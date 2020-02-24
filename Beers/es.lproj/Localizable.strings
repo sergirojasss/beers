@@ -1,0 +1,11 @@
+/* 
+  Strings.strings
+  Beers
+
+  Created by Sergi Rojas on 21/02/2020.
+  Copyright © 2020 Sergi Rojas. All rights reserved.
+*/
+food_pairing_sb_ph="¿Con que quiere casar la cerveza?";
+navbar_main_title="Beer&Food";
+abv="Alc.";
+order_by_abv="Ordenado por ABV";
