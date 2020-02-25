@@ -24,7 +24,7 @@ class BeerController {
         let delegate: BeerDelegate?
         let db = AppDelegate.db
         delegate = vc
-                
+
         let beers = db.read(foodPairing: foodPairing)
         numBeers = beers.count
         //checking if we already have asked for beers, if not, we're calling the API with the method "getBeersRequest" also if we checked DB and there's no match, we're trying to find some result on the API
@@ -51,6 +51,7 @@ class BeerController {
                     self.getBeersRequest(vc: vc, foodPairing: foodPairing, numBeers: numBeers + Constants.APIpagination)
                 }
             }
+
             let delegate: BeerDelegate?
             delegate = vc
             delegate?.gotBeers(beers: beers)
