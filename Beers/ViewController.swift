@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var beers: [Beer] = []
     var searchText: String = ""
@@ -44,18 +44,13 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
 
     func loadData(){
         
-        DispatchQueue.global(qos: .userInteractive).async {
+//        DispatchQueue.global(qos: .userInteractive).async {
 //            BeerController.deleteAllBeers()
-            BeerController.getBeers(vc: self) //I really think it's not the correct way to do it (passing de full vc), but I don't really remember how I use to do it
-        }
-    }
-    
-    func gotBeers(beers: [Beer]) {
-        self.beers = beers
-
-        DispatchQueue.main.async {
-            self.beerList.reloadData()
-        }
+            BeerController.getBeers { (beers) in
+                self.beers = beers
+                self.beerList.reloadData()
+            }
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,7 +78,10 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
     //    - MARK: SearchBar functions
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
-        BeerController.getBeers(vc: self, foodPairing: searchText)
+        BeerController.getBeers(foodPairing: searchText) { (beers) in
+            self.beers = beers
+            self.beerList.reloadData()
+        }
     }
     
     @IBAction func changeOrder(_ sender: Any) {
@@ -93,7 +91,10 @@ class ViewController: UIViewController, BeerDelegate, UITableViewDataSource, UIT
         } else {
             self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
         }
-        BeerController.getBeers(vc: self, foodPairing: self.searchText)
+        BeerController.getBeers(foodPairing: searchText) { (beers) in
+            self.beers = beers
+            self.beerList.reloadData()
+        }
     }
     
 }
