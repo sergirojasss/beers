@@ -30,6 +30,7 @@ class NetworkController {
         if foodPairing != nil && !foodPairing!.isEmpty {
             url.append(contentsOf: "?&food=\(foodPairing!.replacingOccurrences(of: " ", with: "_"))")
         }
+
         if numBeers > 0 {
             url.append(contentsOf: "?page=\(numBeers/Constants.APIpagination)")
             if numBeers/Constants.APIpagination == 14 {
@@ -42,6 +43,7 @@ class NetworkController {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
+
                     let json: JSON = JSON(value)
                     for (_, value) in json {
                         beers.append(jsonToBeerEntity(json: value))
