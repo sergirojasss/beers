@@ -80,7 +80,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         (tableView.cellForRow(at: indexPath) as! BeerListTableViewCell).setSelectedCustom()
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        // losing the selection on when interacting with the searchBar because it reloads the hole tableview from database, the way to solve it it's adding a bool field on database keeping the state
+        // losing the selection when interacting with the searchBar because it reloads the hole tableview from database, the way to solve it it's adding a bool field on database keeping the state
     }
     
     //    - MARK: SearchBar functions
@@ -93,12 +93,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func changeOrder(_ sender: Any) {
+        // toggle boolean wich controls the orderBy
         UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.orderBeersBy), forKey: Constants.orderBeersBy)
-        if UserDefaults.standard.bool(forKey: Constants.orderBeersBy) {
-            self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
-        } else {
-            self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
-        }
+        
+        // toggle orderBy image
+        UserDefaults.standard.bool(forKey: Constants.orderBeersBy) ? self.orderByBtn.setImage(UIImage(named: "up"), for: .normal) : self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
+        
+        // call db or API to get results
         BeerController.getBeers(foodPairing: searchText) { (beers) in
             self.beers = beers
             self.beerList.reloadData()
