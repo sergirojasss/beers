@@ -24,20 +24,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // main view customization
         self.title = NSLocalizedString(ConstantsLocalizedStrings.navigationBarMainTitle, comment: "")
+        // main view customization
         
+        // searchBar stuff
+        self.searchBar.delegate = self
+        self.searchBar.placeholder = NSLocalizedString(ConstantsLocalizedStrings.foodPairingSearchbarPlaceholder, comment: "")
+        // searchBar stuff
+        
+        // table view
         self.beerList.dataSource = self
         self.beerList.delegate = self
         self.beerList.estimatedRowHeight = 70.0
         self.beerList.rowHeight = UITableView.automaticDimension
         self.beerList.keyboardDismissMode = .onDrag
+        // table view
         
-        self.searchBar.delegate = self
-        self.searchBar.placeholder = NSLocalizedString(ConstantsLocalizedStrings.foodPairingSearchbarPlaceholder, comment: "")
-        
+        // custom orderBy view stuff
         self.orderByView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
         self.orderByLabel.text = NSLocalizedString(ConstantsLocalizedStrings.orderByABV, comment: "")
+        // custom orderBy view stuff
         
         self.loadData()
     }
@@ -72,7 +80,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         (tableView.cellForRow(at: indexPath) as! BeerListTableViewCell).setSelectedCustom()
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        // losing the selection on when interacting with the searchBar because it reloads the hole tableview from database, the way to solve it it's adding a bool field on database keeping the state
+        // losing the selection when interacting with the searchBar because it reloads the hole tableview from database, the way to solve it it's adding a bool field on database keeping the state
     }
     
     //    - MARK: SearchBar functions
@@ -85,12 +93,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func changeOrder(_ sender: Any) {
+        // toggle boolean wich controls the orderBy
         UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.orderBeersBy), forKey: Constants.orderBeersBy)
-        if UserDefaults.standard.bool(forKey: Constants.orderBeersBy) {
-            self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
-        } else {
-            self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
-        }
+        
+        // toggle orderBy image
+        UserDefaults.standard.bool(forKey: Constants.orderBeersBy) ? self.orderByBtn.setImage(UIImage(named: "up"), for: .normal) : self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
+        
+        // call db or API to get results
         BeerController.getBeers(foodPairing: searchText) { (beers) in
             self.beers = beers
             self.beerList.reloadData()
