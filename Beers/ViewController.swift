@@ -24,20 +24,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // main view customization
         self.title = NSLocalizedString(ConstantsLocalizedStrings.navigationBarMainTitle, comment: "")
+        // main view customization
         
+        // searchBar stuff
+        self.searchBar.delegate = self
+        self.searchBar.placeholder = NSLocalizedString(ConstantsLocalizedStrings.foodPairingSearchbarPlaceholder, comment: "")
+        // searchBar stuff
+        
+        // table view
         self.beerList.dataSource = self
         self.beerList.delegate = self
         self.beerList.estimatedRowHeight = 70.0
         self.beerList.rowHeight = UITableView.automaticDimension
         self.beerList.keyboardDismissMode = .onDrag
+        // table view
         
-        self.searchBar.delegate = self
-        self.searchBar.placeholder = NSLocalizedString(ConstantsLocalizedStrings.foodPairingSearchbarPlaceholder, comment: "")
-        
+        // custom orderBy view stuff
         self.orderByView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
         self.orderByLabel.text = NSLocalizedString(ConstantsLocalizedStrings.orderByABV, comment: "")
+        // custom orderBy view stuff
         
         self.loadData()
     }
