@@ -3,6 +3,11 @@
 Developing this app for a recruitment exercise and also trying to refresh myself after 1 year without coding.
 Let's go!!
 
+### What does this app should do?
+The app mission is to give a list of beers (getting it from a REST API).
+The user can type in a meal, and the app will show him the best beers to eat with that meal.
+The app have to be no-connection friendly. It must work if user lose connection.
+
 Known weak points.
 
 - No Connection. If no Internet connection the very first time, showing an empty list without warning the user
