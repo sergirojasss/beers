@@ -23,19 +23,16 @@ class NetworkController {
     
     
     static func getBeersRequest(foodPairing: String? = nil, numBeers: Int = 0, onCompletion: @escaping(([Beer]) -> ())) {
-        var beers: [Beer] = []
         var url = allBeersUrl
-        let db = AppDelegate.db
+        let db = DBHelper.shared
+
         
         if foodPairing != nil && !foodPairing!.isEmpty {
             url.append(contentsOf: "?&food=\(foodPairing!.replacingOccurrences(of: " ", with: "_"))")
         }
 
         if numBeers > 0 {
-            url.append(contentsOf: "?page=\(numBeers/Constants.APIpagination)")
-            if numBeers/Constants.APIpagination == 14 {
-                print("xxx")
-            }
+            url.append(contentsOf: "?page=\((numBeers/Constants.APIpagination)+1)")
             print(url)
         }
         
@@ -43,19 +40,11 @@ class NetworkController {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-
                     let json: JSON = JSON(value)
                     for (_, value) in json {
-                        beers.append(jsonToBeerEntity(json: value))
+                        DBHelper.shared.insertOrUpdate(beer: jsonToBeerEntity(json: value))
                     }
-                    if beers.count == Constants.APIpagination {
-                        // must do something, we're not offering all the possible beers to customer
-                        print("must do something, we're not offering all the possible beers to customer")
-                    }
-                    for beer in beers {
-                        db.insert(beer: beer)
-                    }
-                    onCompletion(db.read(foodPairing: foodPairing))
+                    onCompletion(db.readRealm(foodPairing: foodPairing))
                 case .failure(let error):
                     // error handling
                     print(error.errorDescription)

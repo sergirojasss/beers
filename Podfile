@@ -8,6 +8,7 @@ target 'Beers' do
   # Pods for Beers
   pod 'Alamofire', '~> 5.0' #for network requests
   pod 'SwiftyJSON', '~> 4.0' #handle network requests
+  pod 'RealmSwift'
   
   target 'BeersTests' do
     inherit! :search_paths

@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
+    let beerController = BeerController()
+    
     var beers: [Beer] = []
     var searchText: String = ""
     
@@ -46,7 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.orderByBtn.setImage(UIImage(named: "up"), for: .normal)
         self.orderByLabel.text = NSLocalizedString(ConstantsLocalizedStrings.orderByABV, comment: "")
         // custom orderBy view stuff
-        
+
         self.loadData()
     }
 
@@ -54,10 +56,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
 //        DispatchQueue.global(qos: .userInteractive).async {
 //            BeerController.deleteAllBeers()
-            BeerController.getBeers { (beers) in
+        beerController.getBeers(foodPairing: searchText, numBeers: beers.count) { (beers) in
                 self.beers = beers
                 self.beerList.reloadData()
-            }
+                
+        }
 //        }
     }
     
@@ -77,6 +80,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return UITableViewCell() //never should happen, but just in case, the app doesn't crash
     }
+    
+    var lastBeersCount: Int = -1
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == beers.count - 10 {
+            if lastBeersCount != beers.count {
+                lastBeersCount = beers.count
+                loadData()
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         (tableView.cellForRow(at: indexPath) as! BeerListTableViewCell).setSelectedCustom()
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -86,7 +100,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //    - MARK: SearchBar functions
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
-        BeerController.getBeers(foodPairing: searchText) { (beers) in
+        beerController.getBeers(foodPairing: searchText) { (beers) in
             self.beers = beers
             self.beerList.reloadData()
         }
@@ -100,7 +114,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         UserDefaults.standard.bool(forKey: Constants.orderBeersBy) ? self.orderByBtn.setImage(UIImage(named: "up"), for: .normal) : self.orderByBtn.setImage(UIImage(named: "down"), for: .normal)
         
         // call db or API to get results
-        BeerController.getBeers(foodPairing: searchText) { (beers) in
+        beerController.getBeers(foodPairing: searchText) { (beers) in
             self.beers = beers
             self.beerList.reloadData()
         }

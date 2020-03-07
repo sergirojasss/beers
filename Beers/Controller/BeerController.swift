@@ -13,38 +13,44 @@ import SwiftyJSON
 // Relation between Entity Beer & DB
 class BeerController {
     
-    static var numBeers: Int = 0
-    static var lastBeersCount: Int = 0
     
-    static func getBeers(foodPairing: String? = nil, completion: @escaping (_ success: [Beer]) -> Void){
-        let db = AppDelegate.db
+    func getBeers(foodPairing: String? = nil, numBeers: Int = 0, completion: @escaping (_ success: [Beer]) -> Void){
+        let db = DBHelper.shared
 
-        let beers = db.read(foodPairing: foodPairing)
-        numBeers = beers.count
-        //checking if we already have asked for beers, if not, we're calling the API with the method "getBeersRequest" also if we checked DB and there's no match, we're trying to find some result on the API
-        if beers.isEmpty || numBeers == Constants.APIpagination {
-            self.getBeersRequest(foodPairing: foodPairing, numBeers: numBeers)
+        var beers: [Beer]
+
+        if foodPairing == nil {
+            beers = db.readRealm()
+        } else {
+            beers = db.readRealm(foodPairing: foodPairing!)
+        }
+        
+        if beers.count % Constants.APIpagination == 0 { //not working properly, but don't wanna lose time here.
+            NetworkController.getBeersRequest(foodPairing: foodPairing, numBeers: numBeers) { (beers) in
+                completion(beers.sorted(by: { (b1, b2) -> Bool in
+                    if UserDefaults.standard.bool(forKey: Constants.orderBeersBy) {
+                        return b1.abv < b2.abv
+                    } else {
+                        return b1.abv > b2.abv
+                    }
+                }))
+            }
             print("Looking for results on Internet")
         } else {
-            completion(beers)
+            completion(beers.sorted(by: { (b1, b2) -> Bool in
+                    if UserDefaults.standard.bool(forKey: Constants.orderBeersBy) {
+                        return b1.abv < b2.abv
+                    } else {
+                        return b1.abv > b2.abv
+                    }
+                }))
             print("Looking for results on DB")
         }
     }
     
     static func deleteAllBeers() {
-        let db = AppDelegate.db
-        db.deleteAllRows()
+        let db = DBHelper.shared
+        db.deleteAllRealm()
     }
     
-    private static func getBeersRequest(foodPairing: String? = nil, numBeers: Int = 0) {
-
-        NetworkController.getBeersRequest(foodPairing: foodPairing, numBeers: numBeers) {beers in
-            if lastBeersCount != beers.count || beers.count == Constants.APIpagination {
-                lastBeersCount = beers.count
-                if beers.count % Constants.APIpagination == 0 {
-                    self.getBeersRequest(foodPairing: foodPairing, numBeers: numBeers + Constants.APIpagination)
-                }
-            }
-        }
-    }
 }
