@@ -32,33 +32,33 @@ class DBHelper
     
     static let shared: DBHelper = DBHelper.init()
 
-    func insertOrUpdate(beer: Beer) {
+    func insertOrUpdate(beer: BeerEntity) {
         let realm = try! Realm()
         try! realm.write{
             let beerRealm = BeerRealm()
-            beerRealm.id = beer.id
-            beerRealm.name = beer.name
-            beerRealm.tagline = beer.tagline
-            beerRealm.imageURL = beer.imageURL
-            beerRealm.desc = beer.description
-            beerRealm.abv = beer.abv
-            beerRealm.foodPairing = beer.foodPairing
+            beerRealm.id = beer.id ?? 1
+            beerRealm.name = beer.name ?? ""
+            beerRealm.tagline = beer.tagline ?? ""
+            beerRealm.imageURL = beer.imageURL ?? ""
+            beerRealm.desc = beer.description ?? ""
+            beerRealm.abv = beer.abv ?? 1
+            beerRealm.foodPairing = beer.foodPairing?.description ?? ""
             beerRealm.isSelected = beer.isSelected
             realm.add(beerRealm, update: .modified)
         }
     }
     
-    func readRealm() -> [Beer] {
+    func readRealm() -> [BeerEntity] {
         let realm = try! Realm()
         let beersRealm = realm.objects(BeerRealm.self)
-        var beers: [Beer] = []
+        var beers: [BeerEntity] = []
         for beerRealm in beersRealm {
-            beers.append(Beer(beerRealm: beerRealm))
+            beers.append(BeerEntity(beer: beerRealm))
         }
         return beers
     }
     
-    func readRealm(foodPairing: String?) -> [Beer] {
+    func readRealm(foodPairing: String?) -> [BeerEntity] {
         let realm = try! Realm()
         var food = foodPairing ?? ""
         if food.isEmpty {
@@ -69,10 +69,10 @@ class DBHelper
         let beersRealm = realm.objects(BeerRealm.self).filter { (beerRealm) -> Bool in
             return beerRealm.foodPairing.lowercased().contains(food.lowercased())
         }
-        var beers: [Beer] = []
+        var beers: [BeerEntity] = []
         print(beersRealm.count)
         for beerRealm in beersRealm {
-            beers.append(Beer(beerRealm: beerRealm))
+            beers.append(BeerEntity(beer: beerRealm))
         }
         return beers
     }

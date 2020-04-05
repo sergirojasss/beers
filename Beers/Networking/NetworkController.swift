@@ -22,7 +22,7 @@ class NetworkController {
     static public let foodPairing: String = "food_pairing"
     
     
-    static func getBeersRequest(foodPairing: String? = nil, numBeers: Int = 0, onCompletion: @escaping(([Beer]) -> ())) {
+    static func getBeersRequest(foodPairing: String? = nil, numBeers: Int = 0, onCompletion: @escaping(([BeerEntity]) -> ())) {
         var url = allBeersUrl
         let db = DBHelper.shared
 
@@ -42,7 +42,7 @@ class NetworkController {
                 case .success(let value):
                     let json: JSON = JSON(value)
                     for (_, value) in json {
-                        DBHelper.shared.insertOrUpdate(beer: jsonToBeerEntity(json: value))
+//                        DBHelper.shared.insertOrUpdate(beer: jsonToBeerEntity(json: value))
                     }
                     onCompletion(db.readRealm(foodPairing: foodPairing))
                 case .failure(let error):
@@ -54,8 +54,8 @@ class NetworkController {
         
     }
     
-    static func jsonToBeerEntity(json: JSON) -> Beer {
-        return Beer(id: json[NetworkController.id].intValue, name: json[NetworkController.name].stringValue, tagline: json[NetworkController.tagline].stringValue, imageURL: json[NetworkController.imageUrl].stringValue, description: json[NetworkController.description].stringValue, abv: json[NetworkController.abv].doubleValue, foodPairing: json[NetworkController.foodPairing].arrayValue.description)
-    }
+//    static func jsonToBeerEntity(json: JSON) -> BeerEntity {
+//        return BeerEntity(id: json[NetworkController.id].intValue, name: json[NetworkController.name].stringValue, tagline: json[NetworkController.tagline].stringValue, imageURL: json[NetworkController.imageUrl].stringValue, description: json[NetworkController.description].stringValue, abv: json[NetworkController.abv].doubleValue, foodPairing: json[NetworkController.foodPairing].arrayValue.description)
+//    }
     
 }
