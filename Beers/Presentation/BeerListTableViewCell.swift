@@ -14,10 +14,10 @@ class BeerListTableViewCell: UITableViewCell {
         didSet {
             name.text = beer?.name
             abv.text = beer?.abv
-//            tagline.text = beer.isSelected ? beer.description : beer.tagline
-            
-//            imageViewHeightConstraint.constant = beer.isSelected ? 80 : 0
-//            beerImage.downloaded(beerID: beer.id ?? 1, from: beer.imageURL ?? "")
+            tagline.text = beer?.isSelected ?? false ? beer?.description : beer?.tagline
+//
+            imageViewHeightConstraint.constant = beer?.isSelected ?? false ? 80 : 0
+            beerImage.downloaded(beerID: beer?.id ?? 1, from: beer?.imageURL ?? "")
         }
     }
     
@@ -40,18 +40,18 @@ class BeerListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    func configCell(beer: BeerEntity) {
-//        self.beer = beer
-//        
-//        name.text = beer.name
-//        abv.text = "\(NSLocalizedString(ConstantsLocalizedStrings.abv, comment: "")): \(beer.abv)%"
-//        tagline.text = beer.isSelected ? beer.description : beer.tagline
-//        
-//        imageViewHeightConstraint.constant = beer.isSelected ? 80 : 0
-//    }
-//    
-//    func setSelectedCustom() {
-//        beer.isSelected.toggle()
-//    }
+    func setUp(beer: BeerViewModel) {
+        self.beer = beer
+        configCell()
+    }
     
+    func configCell() {
+        
+        name.text = beer?.name
+        abv.text = beer?.abv
+        tagline.text = beer?.isSelected ?? false ? beer?.description : beer?.tagline
+        
+        imageViewHeightConstraint.constant = beer?.isSelected ?? false ? 80 : 0
+    }
+        
 }

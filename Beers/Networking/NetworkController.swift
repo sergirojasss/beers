@@ -39,11 +39,18 @@ class NetworkController {
         AF.request(url, method: .get, parameters: nil)
             .responseJSON { (response) in
                 switch response.result {
-                case .success(let value):
-                    let json: JSON = JSON(value)
-                    for (_, value) in json {
-//                        DBHelper.shared.insertOrUpdate(beer: jsonToBeerEntity(json: value))
+                case .success:
+                    var beers: [BeerEntity] = []
+                    do {
+                        if let data = response.data {
+                            beers = try JSONDecoder().decode([BeerEntity].self, from: data)
+                            DBHelper.shared.insertOrUpdate(beers: beers)
+                        }
+                    } catch let error {
+                        print(error.localizedDescription ?? "some error parsing data")
+                        print("some error parsing data")
                     }
+                    
                     onCompletion(db.readRealm(foodPairing: foodPairing))
                 case .failure(let error):
                     // error handling

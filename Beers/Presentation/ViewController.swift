@@ -9,10 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+
+    private struct Constants {
+        static let cellIdentifier = "beer_list_cell"
+        static let cellName = "BeerListCell"
+    }
     
     var viewModel: BeerListViewModel?
     @IBOutlet var tableView: UITableView!
     
+
     
     override func viewDidLoad() {
         setupView()
@@ -23,7 +29,11 @@ class ViewController: UIViewController {
 // MARK: - Setup View
 extension ViewController {
     func setupView() {
-        tableView.register(UINib(nibName: "BeerListCell", bundle: nil), forCellReuseIdentifier: "beer_list_cell")
+        setupTableView()
+    }
+    
+    func setupTableView() {
+        tableView.register(UINib(nibName: Constants.cellName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
@@ -38,18 +48,20 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "beer_list_cell", for: indexPath) as? BeerListTableViewCell else {
-            return UITableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as? BeerListTableViewCell, let beer =  self.viewModel?.items?[indexPath.row] {
+
+            cell.setUp(beer: beer)
+            return cell
         }
-        cell.beer = self.viewModel?.items?[indexPath.row]
-        return cell
+        return UITableViewCell()
     }
-    
-    
 }
 
 // MARK: - Tableview interactions
 extension ViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.didSelect(indexPath: indexPath)
+        tableView.reloadData()
+    }
 }
 

@@ -25,7 +25,7 @@ class BeerController {
             beers = db.readRealm(foodPairing: foodPairing!)
         }
         
-        if beers.count % Constants.APIpagination == 0 { //not working properly, but don't wanna lose time here.
+        if beers.count % Constants.APIpagination == 0 { //not working properly, but don't wanna lose time in here.
             NetworkController.getBeersRequest(foodPairing: foodPairing, numBeers: numBeers) { (beers) in
                 completion(beers.sorted(by: { (b1, b2) -> Bool in
                     if UserDefaults.standard.bool(forKey: Constants.orderBeersBy) {

@@ -48,6 +48,12 @@ class DBHelper
         }
     }
     
+    func insertOrUpdate(beers: [BeerEntity]){
+        for beer in beers {
+            insertOrUpdate(beer: beer)
+        }
+    }
+        
     func readRealm() -> [BeerEntity] {
         let realm = try! Realm()
         let beersRealm = realm.objects(BeerRealm.self)
